@@ -28,23 +28,78 @@ const meetingTemplate = `
 <p>Scribe:</p>
 `;
 
-function applyTemplate() {
-  Office.context.mailbox.item.body.setAsync(meetingTemplate, { coercionType: Office.CoercionType.Html }, (result) => {
-      if (result.status === Office.AsyncResultStatus.Succeeded) {
-          showStatus('Template applied successfully!', 'success');
-      } else {
-          showStatus('Failed to apply template. Please try again.', 'error');
-      }
-  });
+async function applyTemplate() {
+    try {
+        // First apply the template
+        await setBodyTemplate();
+        
+        // Then attach the PDF
+        await attachPDF();
+        
+        showStatus('Template and attachment added successfully!', 'success');
+    } catch (error) {
+        showStatus('Error: ' + error.message, 'error');
+    }
+}
+
+function setBodyTemplate() {
+    return new Promise((resolve, reject) => {
+        Office.context.mailbox.item.body.setAsync(
+            meetingTemplate,
+            { coercionType: Office.CoercionType.Html },
+            (result) => {
+                if (result.status === Office.AsyncResultStatus.Succeeded) {
+                    resolve();
+                } else {
+                    reject(new Error('Failed to apply template'));
+                }
+            }
+        );
+    });
+}
+
+function attachPDF() {
+    return new Promise((resolve, reject) => {
+        // Replace this URL with the actual URL of your PDF
+        const pdfUrl = "https://github.com/fmilheir/fmilheir.github.io/edit/main/meeting-guidelines.pdf";
+        
+        // Fetch the PDF file
+        fetch(pdfUrl)
+            .then(response => response.arrayBuffer())
+            .then(buffer => {
+                // Convert ArrayBuffer to Base64
+                const base64String = btoa(
+                    new Uint8Array(buffer)
+                        .reduce((data, byte) => data + String.fromCharCode(byte), '')
+                );
+
+                // Attach the PDF to the message
+                Office.context.mailbox.item.addFileAttachmentAsync(
+                    base64String,
+                    "meeting-guidelines.pdf",
+                    {
+                        isInline: false
+                    },
+                    (result) => {
+                        if (result.status === Office.AsyncResultStatus.Succeeded) {
+                            resolve();
+                        } else {
+                            reject(new Error('Failed to attach PDF'));
+                        }
+                    }
+                );
+            })
+            .catch(error => reject(error));
+    });
 }
 
 function showStatus(message, type) {
-  const statusElement = document.getElementById('status');
-  statusElement.textContent = message;
-  statusElement.className = type;
-  statusElement.style.display = 'block';
+    const statusElement = document.getElementById('status');
+    statusElement.textContent = message;
+    statusElement.className = type;
+    statusElement.style.display = 'block';
 
-  setTimeout(() => {
-      statusElement.style.display = 'none';
-  }, 3000);
+    setTimeout(() => {
+        statusElement.style.display = 'none';
+    }, 3000);
 }
