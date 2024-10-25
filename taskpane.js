@@ -61,7 +61,7 @@ function setBodyTemplate() {
 function attachPDF() {
     return new Promise((resolve, reject) => {
         // Replace this URL with the actual URL of your PDF
-        const pdfUrl = "https://github.com/fmilheir/fmilheir.github.io/blob/main/meeting-guidelines.pdf";
+        const pdfUrl = "https://fmilheir.github.io/meeting-guidelines.pdf";
         
         // Fetch the PDF file
         fetch(pdfUrl)
