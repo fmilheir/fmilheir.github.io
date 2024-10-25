@@ -60,7 +60,7 @@ function attachPDF() {
         const pdfUrl = "https://fmilheir.github.io/meeting-guidelines.pdf";
         
         // Attach the PDF directly using the URL
-        Office.context.mailbox.item.addFileAttachmentFromUrlAsync(
+        Office.context.mailbox.item.addFileAttachmentAsync(
             pdfUrl,
             "meeting-guidelines.pdf",
             {
