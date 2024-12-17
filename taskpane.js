@@ -22,8 +22,7 @@ const meetingTemplate = `
 <h3>Roles of the Meeting:</h3>
 <p>Facilitator:</p>
 <p>Scribe:</p>
-<br>
-<br>
+<hr>
 <a href="https://eur03.safelinks.protection.outlook.com/?url=https%3A%2F%2Furldefense.com%2Fv3%2F__https%3A%2F%2Fttnieurope.sharepoint.com%2F%3Ab%3A%2Fr%2Fsites%2FIntranet%2FDocuments%2FTTS-E*20Meeting-guidelines.pdf%3Fcsf%3D1%26web%3D1%26e%3Df99MeF__%3BJQ!!OS44WA!VTa8ZTwaj8PCvhTPqhFqCL40U5eJ3Rn1BchpV2s7Lf0hoWzZgV8u8Kw4d7gKGVi0dyGRO_TGA5XTSsya5PQWPiA%24&data=05%7C02%7Cit-services%40ttsystems.eu%7C667d0d5f83fe4a7d323108dd1e817bb3%7C64f8427c744041f2947aee7325623c3e%7C0%7C0%7C638700265945223886%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C60000%7C%7C%7C&sdata=LgjB2eZFU1guB9aA9CrriUS13Ynj3mtIH%2FzKyJvvYE8%3D&reserved=0">Link to full TTS-E Meeting-guidelines</a>
 `;
 
