@@ -28,10 +28,7 @@ async function applyTemplate() {
     try {
         // First apply the template
         await setBodyTemplate();
-        
-        // Then attach the PDF
-        await attachPDF();
-        
+                
         showStatus('Template and attachment added successfully!', 'success');
     } catch (error) {
         showStatus('Error: ' + error.message, 'error');
@@ -54,28 +51,6 @@ function setBodyTemplate() {
     });
 }
 
-function attachPDF() {
-    return new Promise((resolve, reject) => {
-        // Use the raw URL for the PDF
-        const pdfUrl = "https://fmilheir.github.io/meeting-guidelines.pdf";
-        
-        // Attach the PDF directly using the URL
-        Office.context.mailbox.item.addFileAttachmentAsync(
-            pdfUrl,
-            "meeting-guidelines.pdf",
-            {
-                isInline: false
-            },
-            (result) => {
-                if (result.status === Office.AsyncResultStatus.Succeeded) {
-                    resolve();
-                } else {
-                    reject(new Error('Failed to attach PDF: ' + result.error.message));
-                }
-            }
-        );
-    });
-}
 
 function showStatus(message, type) {
     const statusElement = document.getElementById('status');
